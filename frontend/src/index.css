@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("H:\chat-app-aap\frontend\public\bg-img.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Custom Scrollbar for Glassmorphism Effect */
+.scrollbar {
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: white transparent; /* Subtle thumb color with transparent track */
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6.5px; /* Initial scrollbar width */
+  transition: width 0.3s ease; /* Smooth width transition */
+}
+
