@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import useConversation from '../src/zustand/useConversation';
+import useConversation from '../zustand/useConversation';
 import toast from 'react-hot-toast';
 
 const useSendMessage = () => {
   const [loading, setLoading] = useState(false);
   const { messages, setMessages, selectedConversation } = useConversation();
+  const [error, setError] = useState(null);
 
   const sendMessage = async (message) => {
     if (!selectedConversation?._id) return;
@@ -29,13 +30,15 @@ const useSendMessage = () => {
         localStorage.setItem(`messages_${selectedConversation._id}`, JSON.stringify(updatedMessages));
       }
     } catch (error) {
+      setError(error);
       toast.error(error.message);
     } finally {
-      setLoading(false);
+      if (!error) {
+        setLoading(false);
+      }
     }
   };
 
-  return { sendMessage, loading };
+  return { sendMessage, loading, error };
 };
-
 export default useSendMessage;

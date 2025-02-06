@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
-import useConversation from '../src/zustand/useConversation';
+import useConversation from '../zustand/useConversation';
 
 const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
@@ -15,7 +15,6 @@ const useGetMessages = () => {
       setMessages(storedMessages);
     }
 
-    // ✅ Fetch messages from the backend
     const getMessages = async () => {
       setLoading(true);
       try {
@@ -24,12 +23,15 @@ const useGetMessages = () => {
         if (data.error) throw new Error(data.error);
 
         // ✅ Only update localStorage if new data exists
-        if (data.length > 0) {
+        if (Array.isArray(data) && data.length > 0) {
           setMessages(data);
           localStorage.setItem(`messages_${selectedConversation._id}`, JSON.stringify(data));
+        } else {
+          setMessages([]); // Reset messages if response is not an array or empty
         }
       } catch (error) {
         toast.error(error.message);
+        setMessages([]); // Reset messages in case of error
       } finally {
         setLoading(false);
       }
