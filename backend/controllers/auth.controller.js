@@ -66,6 +66,18 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
   try {
+    if (res.hasOwnProperty('json')) {
+      console.log('res object has json method');
+    } else {
+      console.log('res object does not have json method');
+    }
+    console.log('res object:', res);
+        // Check if the user is already logged in
+        if (req.cookies.jwt) {
+          return res.status(400).json({ error: "Already logged in" });
+        }
+    
+        // ... rest of your login logic ...
     const { username, password } = req.body;
 
     // Validate input
