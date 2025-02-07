@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./pages/login/Login";
-import Signup from "./pages/signup/Signup"; // Fixed capitalization
+import Login from "../src/pages/login/login";
+import Signup from "./pages/signup/signup"; 
 import Home from "./pages/home/Home";
 import { Toaster } from "react-hot-toast";
 import { useAuthContext } from "../src/context/AuthContext";
