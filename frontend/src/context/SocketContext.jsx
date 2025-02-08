@@ -18,7 +18,7 @@ export const SocketContextProvider = ({ children }) => {
 
   useEffect(() => {
     if (authUser) {
-      const socket = io("http://localhost:5000", {
+      const socket = io("https://foolish-ailis-gigglechatmafyr-b522f9e2.koyeb.app/", {
         query: {
           userId: authUser._id,
         },
